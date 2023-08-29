@@ -1,42 +1,43 @@
 import { useState } from 'react'
-import './App.css'
 import { puppyList } from './data'
 import './App.css'
 
 function App() {
   const [puppies, setPuppies] = useState(puppyList)
-  // console.log(puppies)
+  console.log(puppies)
   // console.log("puppyList:", puppyList)
   const [featPupId, setFeatPupId] = useState(null)
-  // console.log(featPupId)
+  console.log(featPupId)
 
-  return (
-    <>
-      <div className='App'>
-      
-      {featPupId && <p>{ featPupId } </p>}
-      
-      {
-        puppies.map((puppy)=>{
-          const featuredPup = puppies.find((pup) => pup.id === featPupId)
-          {featPupId && (
-            <div>
-              <h2>{featuredPup.name}</h2>
-              <ul>
-                <li>Age: {featuredPup.age}</li>
-                <li>Email: {featuredPup.email}</li>
-              </ul>
-            </div>
-          )}
-          console.log(featuredPup)
-          return <p onClick={()=>{setFeatPupId(puppy.id)}} key={puppy.id}>{puppy.name}</p>
-        })
-      }
+  let content = puppies.map((puppy,idx,arr)=>{
+    // const featuredPup = arr.find((pup) => pup.id === featPupId)
+    
+    
+    return  <div key={puppy.id}>
+        <p onClick={()=>{setFeatPupId(puppy)}} key={puppy.id}>{puppy.name}</p>
+        {/* <h2>{featuredPup.name}</h2> */}
+        <ul>
+          <li>Age: {puppy.age}</li>
+          <li>Email: {puppy.email}</li>
+        </ul>
       </div>
-      
+  });
+    return (
+    <>
+    {content}
     </>
-  )
-}
+    )
+  }
+
 
 export default App
+
+    
+{/* <nav>
+<button onClick={()=> setPuppies(puppyList)}>{puppy.name}</button>
+
+</nav>
+<div>
+  {puppies === 'puppyList.name' && <Render puppyList={Data} pupIndex={0}/> }
+</div> */}
 
